@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demon Slayer: Blade of Fate</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="demon.css">
+</head>
+<body class="demon-body">
+    <a href="../main.html" class="back-btn">← В Меню</a>
+
+    <!-- ЭКРАН КАРТЫ -->
+    <div id="screen-map" class="screen active">
+        <h1 class="manga-title">КАРТА МИРА</h1>
+        <div class="map-container" id="map-container">
+            <!-- Жесткие пропорции 1400x900 без искажений -->
+            <svg class="map-bg" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                <rect width="1400" height="900" fill="#090a10"/>
+                
+                <!-- 1. ДЕРЕВНЯ НАЧАЛА (Левый верх) -->
+                <circle cx="250" cy="250" r="160" fill="#052e16" opacity="0.6" stroke="#00c853" stroke-width="3" stroke-dasharray="10,5"/>
+                <text x="250" y="75" fill="#00c853" font-size="18" font-weight="bold" text-anchor="middle" font-family="Cinzel">1. ДЕРЕВНЯ НАЧАЛА</text>
+                
+                <!-- 2. ГОРНОЕ ПОСЕЛЕНИЕ (Центр верх) -->
+                <circle cx="700" cy="250" r="160" fill="#05262e" opacity="0.6" stroke="#00e5ff" stroke-width="3" stroke-dasharray="10,5"/>
+                <text x="700" y="75" fill="#00e5ff" font-size="18" font-weight="bold" text-anchor="middle" font-family="Cinzel">2. ГОРНОЕ ПОСЕЛЕНИЕ</text>
+
+                <!-- 3. ДЕРЕВНЯ КУЗНЕЦОВ (Правый верх) -->
+                <circle cx="1150" cy="250" r="200" fill="#2d1b05" opacity="0.6" stroke="#ffab00" stroke-width="3" stroke-dasharray="10,5"/>
+                <text x="1150" y="40" fill="#ffab00" font-size="18" font-weight="bold" text-anchor="middle" font-family="Cinzel">3. ДЕРЕВНЯ КУЗНЕЦОВ</text>
+
+                <!-- 4. АРЕНА ДЕМОНОВ ВЫСШИХ ЛУН (Низ карты) -->
+                <circle cx="700" cy="650" r="150" fill="#2d050a" opacity="0.7" stroke="#ff2a4b" stroke-width="4"/>
+                <text x="700" y="480" fill="#ff2a4b" font-size="20" font-weight="bold" text-anchor="middle" font-family="Cinzel">АРЕНА ДЕМОНОВ ВЫСШИХ ЛУН</text>
+
+                <!-- Дороги -->
+                <path d="M 250,250 Q 475,180 700,250 T 1150,250" stroke="#00e5ff" stroke-width="3" stroke-dasharray="10,6" fill="none" opacity="0.6"/>
+                <path d="M 250,250 Q 450,550 700,650 T 1150,250" stroke="#ff2a4b" stroke-width="3" stroke-dasharray="10,6" fill="none" opacity="0.5"/>
+            </svg>
+
+            <!-- ЗДАНИЯ И ЛАВКА -->
+            <div class="map-node node-hub" id="node-village" style="top:29%; left:17.5%;">🏘️</div>
+            <div class="map-node node-shop" id="node-shop" style="top:31%; left:50%;">🛒</div>
+
+            <!-- ТРЕНЕРЫ ДЫХАНИЙ -->
+            <div class="map-node" id="node-water-trainer" style="top:41%; left:12%;">💧</div>
+            <div class="map-node" id="node-thunder-trainer" style="top:21%; left:44%;">⚡</div>
+            <div class="map-node" id="node-insect-trainer" style="top:25%; left:56%;">🦋</div>
+            <div class="map-node" id="node-flame-trainer" style="top:20%; left:81%;">🔥</div>
+            <div class="map-node" id="node-wind-trainer" style="top:28%; left:88%;">🌪️</div>
+
+            <!-- КВЕСТЫ (ПО ПОРЯДКУ В ТРИ ДЕРЕВНИ) -->
+            <!-- Деревня 1 -->
+            <div class="map-node quest-node" id="node-quest-1" style="top:35%; left:25%;">👨‍🌾<span class="q-num">#1</span></div>
+            <div class="map-node quest-node" id="node-quest-2" style="top:15%; left:17%;">👩‍⚕️<span class="q-num">#2</span></div>
+            <div class="map-node quest-node" id="node-quest-3" style="top:28%; left:11%;">👨‍🍳<span class="q-num">#3</span></div>
+
+            <!-- Деревня 2 -->
+            <div class="map-node quest-node" id="node-quest-4" style="top:40%; left:45%;">👩‍🏫<span class="q-num">#4</span></div>
+            <div class="map-node quest-node" id="node-quest-5" style="top:15%; left:50%;">👷‍♂️<span class="q-num">#5</span></div>
+            <div class="map-node quest-node" id="node-quest-6" style="top:42%; left:54%;">🧑‍🎨<span class="q-num">#6</span></div>
+
+            <!-- Деревня 3 -->
+            <div class="map-node quest-node" id="node-quest-7" style="top:42%; left:85%;">👨‍💼<span class="q-num">#7</span></div>
+            <div class="map-node quest-node" id="node-quest-8" style="top:28%; left:76%;">👩‍🚀<span class="q-num">#8</span></div>
+
+            <!-- БОССЫ НА НИЖНЕЙ АРЕНЕ -->
+            <div class="map-node boss-node" id="node-boss-tanjiro" style="top:37%; left:20%;">💀🌊</div>
+            <div class="map-node boss-node" id="node-boss-inosuke" style="top:47%; left:49%;">💀🐗</div>
+            <div class="map-node boss-node" id="node-boss-shinobu" style="top:29%; left:44%;">💀🦋</div>
+            <div class="map-node boss-node" id="node-boss-giyu" style="top:43%; left:23%;">💀💧</div>
+            <div class="map-node boss-node" id="node-boss-zenitsu" style="top:21%; left:23%;">💀⚡</div>
+            <div class="map-node boss-node" id="node-boss-muichiro" style="top:45%; left:78.5%;">💀🌫️</div>
+            <div class="map-node boss-node" id="node-boss-rengoku" style="top:34.5%; left:72%;">💀🔥</div>
+            <div class="map-node boss-node" id="node-boss-sanemi" style="top:31%; left:81.8%;">💀🌪️</div>
+            <div class="map-node boss-node" id="node-boss-daki" style="top:80%; left:44%;">🌙🎀</div>
+            <div class="map-node boss-node" id="node-boss-gyutaro" style="top:77%; left:56%;">🌙🩸</div>
+            <div class="map-node boss-node" id="node-boss-akaza" style="top:69%; left:48%;">🌙❄️</div>
+            <div class="map-node boss-node" id="node-boss-kokushibo" style="top:90%; left:52%;">🌙🌕</div>
+
+            <div class="map-player" id="map-player" style="top:22%; left:14.5%;">🧑</div>
+        </div>
+
+        <div class="map-stats">
+            <div>Уровень: <span id="map-lvl">1</span></div>
+            <div>Опыт: <span id="map-xp">0/100</span></div>
+            <div>Монеты: <span id="map-coins">0</span></div>
+            <div>Спины: <span id="map-spins" style="color:#ff2a4b; font-weight:bold;">0</span></div>
+            <div>Дыхание: <span id="map-breath" style="color:#00e5ff;">Нет</span></div>
+        </div>
+        
+        <div class="map-menu" id="map-menu" style="display:none;">
+            <button class="manga-btn" id="btn-tree">Древо навыков</button>
+            <button class="manga-btn" id="btn-inventory">Инвентарь</button>
+        </div>
+    </div>
+
+    <!-- ЭКРАН БОЯ -->
+    <div id="screen-battle" class="screen">
+        <div class="battle-ui">
+            <div class="stat-bars">
+                <div class="stat-bar"><div class="bar-fill hp-fill" id="b-hp-fill"></div><span class="bar-text" id="b-hp-text">100/100</span></div>
+                <div class="stat-bar"><div class="bar-fill st-fill" id="b-st-fill"></div><span class="bar-text" id="b-st-text">50/50</span></div>
+            </div>
+            <div class="boss-info">
+                <div class="boss-name" id="boss-name-display">Неизвестный демон</div>
+                <div class="boss-skill-display" id="boss-skill-display"></div>
+                <div class="stat-bar boss-hp-bar"><div class="bar-fill boss-hp-fill" id="boss-hp-fill"></div><span class="bar-text" id="boss-hp-text">1000/1000</span></div>
+                <div class="boss-attack-bar" id="boss-attack-bar"><div class="bar-fill" id="boss-attack-fill"></div></div>
+            </div>
+            <div class="battle-arena" id="battle-arena">
+                <div class="player-sprite" id="player-sprite">🧑</div>
+                <div class="boss-sprite" id="boss-sprite">👹</div>
+                <div class="damage-text" id="damage-text"></div>
+            </div>
+            <div class="action-bar">
+                <div class="action-btn circle-btn attack-btn" id="btn-attack">⚔️<br><span style="font-size:0.55rem">Атака</span></div>
+                <div class="action-btn circle-btn block-btn" id="btn-block">🛡️<br><span style="font-size:0.55rem">Блок</span></div>
+                <div class="action-btn circle-btn skill-btn locked-skill" id="btn-skill-1">❌</div>
+                <div class="action-btn circle-btn skill-btn locked-skill" id="btn-skill-2">❌</div>
+                <div class="action-btn circle-btn skill-btn locked-skill" id="btn-skill-3">❌</div>
+                <div class="action-btn circle-btn ult-btn locked-skill" id="btn-ult">❌<br><span style="font-size:0.55rem">Ульта</span></div>
+            </div>
+            <div class="battle-log" id="battle-log"></div>
+            <button class="manga-btn" id="btn-continue" style="display: none; margin-top: 15px; width: 100%; border-color: #00c853; background: #052e16; color: #00c853; font-weight: bold; font-size: 1.1rem;">Продолжить</button>
+        </div>
+    </div>
+
+    <!-- ЭКРАН ДРЕВА НАВЫКОВ -->
+    <div id="screen-tree" class="screen">
+        <h1 class="manga-title" style="margin-bottom: 5px;">ДРЕВО НАВЫКОВ</h1>
+        <div style="font-size: 1.2rem; font-weight: bold; color: #ff2a4b; margin-bottom: 20px;">
+            Доступно очков: <span id="tree-points">0</span>
+        </div>
+        
+        <div class="tree-container" id="tree-wrapper">
+            <div class="tree-row" style="white-space: nowrap;">
+                <div class="tree-node" id="hp-1" data-req="" data-stat="hp" data-cost="1" data-max="10" data-lvl="1">ХП<br><span class="val">+20</span><span class="cost">1</span></div>
+                <div class="tree-node locked" id="hp-2" data-req="hp-1" data-stat="hp" data-cost="2" data-max="10" data-lvl="2">ХП<br><span class="val">+35</span><span class="cost">2</span></div>
+                <div class="tree-node locked" id="hp-3" data-req="hp-2" data-stat="hp" data-cost="4" data-max="10" data-lvl="3">ХП<br><span class="val">+50</span><span class="cost">4</span></div>
+                <div class="tree-node locked" id="hp-4" data-req="hp-3" data-stat="hp" data-cost="8" data-max="10" data-lvl="4">ХП<br><span class="val">+70</span><span class="cost">8</span></div>
+                <div class="tree-node locked" id="hp-5" data-req="hp-4" data-stat="hp" data-cost="15" data-max="10" data-lvl="5">ХП<br><span class="val">+100</span><span class="cost">15</span></div>
+                <div class="tree-node locked" id="hp-6" data-req="hp-5" data-stat="hp" data-cost="25" data-max="10" data-lvl="6">ХП<br><span class="val">+150</span><span class="cost">25</span></div>
+                <div class="tree-node locked" id="hp-7" data-req="hp-6" data-stat="hp" data-cost="40" data-max="10" data-lvl="7">ХП<br><span class="val">+200</span><span class="cost">40</span></div>
+                <div class="tree-node locked" id="hp-8" data-req="hp-7" data-stat="hp" data-cost="60" data-max="10" data-lvl="8">ХП<br><span class="val">+300</span><span class="cost">60</span></div>
+                <div class="tree-node locked" id="hp-9" data-req="hp-8" data-stat="hp" data-cost="85" data-max="10" data-lvl="9">ХП<br><span class="val">+450</span><span class="cost">85</span></div>
+                <div class="tree-node locked" id="hp-10" data-req="hp-9" data-stat="hp" data-cost="120" data-max="10" data-lvl="10">ХП<br><span class="val">+700</span><span class="cost">120</span></div>
+            </div>
+
+            <div class="tree-row" style="white-space: nowrap;">
+                <div class="tree-node" id="dmg-1" data-req="" data-stat="dmg" data-cost="1" data-max="10" data-lvl="1">Урон<br><span class="val">+2</span><span class="cost">1</span></div>
+                <div class="tree-node locked" id="dmg-2" data-req="dmg-1" data-stat="dmg" data-cost="3" data-max="10" data-lvl="2">Урон<br><span class="val">+5</span><span class="cost">3</span></div>
+                <div class="tree-node locked" id="dmg-3" data-req="dmg-2" data-stat="dmg" data-cost="6" data-max="10" data-lvl="3">Урон<br><span class="val">+8</span><span class="cost">6</span></div>
+                <div class="tree-node locked" id="dmg-4" data-req="dmg-3" data-stat="dmg" data-cost="12" data-max="10" data-lvl="4">Урон<br><span class="val">+12</span><span class="cost">12</span></div>
+                <div class="tree-node locked" id="dmg-5" data-req="dmg-4" data-stat="dmg" data-cost="20" data-max="10" data-lvl="5">Урон<br><span class="val">+18</span><span class="cost">20</span></div>
+                <div class="tree-node locked" id="dmg-6" data-req="dmg-5" data-stat="dmg" data-cost="35" data-max="10" data-lvl="6">Урон<br><span class="val">+25</span><span class="cost">35</span></div>
+                <div class="tree-node locked" id="dmg-7" data-req="dmg-6" data-stat="dmg" data-cost="55" data-max="10" data-lvl="7">Урон<br><span class="val">+40</span><span class="cost">55</span></div>
+                <div class="tree-node locked" id="dmg-8" data-req="dmg-7" data-stat="dmg" data-cost="80" data-max="10" data-lvl="8">Урон<br><span class="val">+60</span><span class="cost">80</span></div>
+                <div class="tree-node locked" id="dmg-9" data-req="dmg-8" data-stat="dmg" data-cost="110" data-max="10" data-lvl="9">Урон<br><span class="val">+90</span><span class="cost">110</span></div>
+                <div class="tree-node locked" id="dmg-10" data-req="dmg-9" data-stat="dmg" data-cost="150" data-max="10" data-lvl="10">Урон<br><span class="val">+140</span><span class="cost">150</span></div>
+            </div>
+
+            <div class="tree-row" style="white-space: nowrap;">
+                <div class="tree-node locked" id="bm-1" data-req="dmg-1" data-stat="bladeMastery" data-cost="10" data-max="10" data-lvl="1">Меч I<br><span class="val">+10%</span><span class="cost">10</span></div>
+                <div class="tree-node locked" id="bm-2" data-req="bm-1" data-stat="bladeMastery" data-cost="20" data-max="10" data-lvl="2">Меч II<br><span class="val">+25%</span><span class="cost">20</span></div>
+                <div class="tree-node locked" id="bm-3" data-req="bm-2" data-stat="bladeMastery" data-cost="40" data-max="10" data-lvl="3">Меч III<br><span class="val">+50%</span><span class="cost">40</span></div>
+                <div class="tree-node locked" id="bm-4" data-req="bm-3" data-stat="bladeMastery" data-cost="70" data-max="10" data-lvl="4">Меч IV<br><span class="val">+75%</span><span class="cost">70</span></div>
+                <div class="tree-node locked" id="bm-5" data-req="bm-4" data-stat="bladeMastery" data-cost="120" data-max="10" data-lvl="5">Меч V<br><span class="val">+1.25x</span><span class="cost">120</span></div>
+                <div class="tree-node locked" id="bm-6" data-req="bm-5" data-stat="bladeMastery" data-cost="200" data-max="10" data-lvl="6">Меч VI<br><span class="val">+2.0x</span><span class="cost">200</span></div>
+                <div class="tree-node locked" id="bm-7" data-req="bm-6" data-stat="bladeMastery" data-cost="350" data-max="10" data-lvl="7">Меч VII<br><span class="val">+3.0x</span><span class="cost">350</span></div>
+                <div class="tree-node locked" id="bm-8" data-req="bm-7" data-stat="bladeMastery" data-cost="600" data-max="10" data-lvl="8">Меч VIII<br><span class="val">+5.0x</span><span class="cost">600</span></div>
+                <div class="tree-node locked" id="bm-9" data-req="bm-8" data-stat="bladeMastery" data-cost="1000" data-max="10" data-lvl="9">Меч IX<br><span class="val">+7.5x</span><span class="cost">1000</span></div>
+                <div class="tree-node locked" id="bm-10" data-req="bm-9" data-stat="bladeMastery" data-cost="1500" data-max="10" data-lvl="10">Меч X<br><span class="val">+12.5x</span><span class="cost">1500</span></div>
+            </div>
+
+            <div class="tree-row" style="white-space: nowrap;">
+                <div class="tree-node locked" id="br-1" data-req="hp-1" data-stat="breathMastery" data-cost="10" data-max="10" data-lvl="1">Дых. I<br><span class="val">+10%</span><span class="cost">10</span></div>
+                <div class="tree-node locked" id="br-2" data-req="br-1" data-stat="breathMastery" data-cost="20" data-max="10" data-lvl="2">Дых. II<br><span class="val">+25%</span><span class="cost">20</span></div>
+                <div class="tree-node locked" id="br-3" data-req="br-2" data-stat="breathMastery" data-cost="40" data-max="10" data-lvl="3">Дых. III<br><span class="val">+50%</span><span class="cost">40</span></div>
+                <div class="tree-node locked" id="br-4" data-req="br-3" data-stat="breathMastery" data-cost="70" data-max="10" data-lvl="4">Дых. IV<br><span class="val">+75%</span><span class="cost">70</span></div>
+                <div class="tree-node locked" id="br-5" data-req="br-4" data-stat="breathMastery" data-cost="120" data-max="10" data-lvl="5">Дых. V<br><span class="val">+1.25x</span><span class="cost">120</span></div>
+                <div class="tree-node locked" id="br-6" data-req="br-5" data-stat="breathMastery" data-cost="200" data-max="10" data-lvl="6">Дых. VI<br><span class="val">+2.0x</span><span class="cost">200</span></div>
+                <div class="tree-node locked" id="br-7" data-req="br-6" data-stat="breathMastery" data-cost="350" data-max="10" data-lvl="7">Дых. VII<br><span class="val">+3.0x</span><span class="cost">350</span></div>
+                <div class="tree-node locked" id="br-8" data-req="br-7" data-stat="breathMastery" data-cost="600" data-max="10" data-lvl="8">Дых. VIII<br><span class="val">+5.0x</span><span class="cost">600</span></div>
+                <div class="tree-node locked" id="br-9" data-req="br-8" data-stat="breathMastery" data-cost="1000" data-max="10" data-lvl="9">Дых. IX<br><span class="val">+7.5x</span><span class="cost">1000</span></div>
+                <div class="tree-node locked" id="br-10" data-req="br-9" data-stat="breathMastery" data-cost="1500" data-max="10" data-lvl="10">Дых. X<br><span class="val">+12.5x</span><span class="cost">1500</span></div>
+            </div>
+        </div>
+
+        <div class="node-info-panel" id="node-info">
+            <div class="info-title" id="info-title">Выберите навык</div>
+            <div class="info-desc" id="info-desc">Уровень 0</div>
+        </div>
+
+        <button class="manga-btn" id="btn-forget-breath" style="border-color: #ff2a4b; color: #ff2a4b; margin-top: 15px; margin-bottom: 15px;">Забыть Дыхание</button>
+        <button class="manga-btn" onclick="closeScreen('tree')">Назад</button>
+    </div>
+
+    <!-- ЭКРАН ИНВЕНТАРЯ -->
+    <div id="screen-inventory" class="screen">
+        <h1 class="manga-title">ИНВЕНТАРЬ</h1>
+        <div class="inv-container">
+            <div class="inv-panel">
+                <h3>Экипировка</h3>
+                <div class="equipped-slot" id="eq-katana">Катана: Нет</div>
+                <div class="equipped-slot" id="eq-outfit">Аутфит: Нет</div>
+                <div class="equipped-slot" id="eq-haori">Хаори: Нет</div>
+                <div class="equipped-slot" id="eq-clan" style="border-color: #ff2a4b;">Клан: Нет</div>
+            </div>
+            <div class="inv-panel">
+                <h3>Статистика</h3>
+                <div class="stat-line">Базовый Урон: <span id="inv-stat-dmg">10</span></div>
+                <div class="stat-line">Множитель Клинка: <span id="inv-stat-blade">x1.00</span></div>
+                <div class="stat-line">Макс. ХП: <span id="inv-stat-hp">100</span></div>
+                <div class="stat-line">Макс. Стамина: <span id="inv-stat-st">50</span></div>
+            </div>
+        </div>
+        <div class="inv-lists">
+            <div class="inv-list-block"><h3>Катаны</h3><div id="list-katanas" class="item-list"></div></div>
+            <div class="inv-list-block"><h3>Аутфиты</h3><div id="list-outfits" class="item-list"></div></div>
+            <div class="inv-list-block"><h3>Хаори</h3><div id="list-haoris" class="item-list"></div></div>
+        </div>
+        <div class="inv-lists" style="margin-top: 15px;">
+            <div class="inv-list-block" style="width: 100%;">
+                <h3>Гача Кланов (🎟️ Спины: <span id="spin-count">0</span>)</h3>
+                <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
+                    <button class="manga-btn" id="btn-spin" style="background: #141622; color: #ff2a4b; border-color: #ff2a4b; font-size: 1.2rem; padding: 15px 30px;">КРУТИТЬ (1 🎟️)</button>
+                    <div id="gacha-result" style="font-weight: bold; font-size: 1.1rem; min-width: 250px; padding: 10px; border: 2px dashed #00e5ff; text-align: center; border-radius: 8px; color: #00e5ff;">Нажми, чтобы крутить!</div>
+                </div>
+                <div id="list-clans" class="item-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px;"></div>
+            </div>
+        </div>
+        <button class="manga-btn" onclick="closeScreen('inventory')">Назад</button>
+    </div>
+
+    <!-- КРАСИВЫЙ ЭКРАН МАГАЗИНА-ЛАВКИ -->
+    <div id="screen-shop" class="screen">
+        <h1 class="manga-title">ЛАВКА ТОРГОВЦА</h1>
+        <div class="shop-timer" id="shop-timer">⏳ Обновление товаров через: 30с</div>
+        
+        <div class="shop-shelf-container">
+            <div id="shop-items" class="shop-shelf"></div>
+        </div>
+
+        <button class="manga-btn" onclick="closeScreen('shop')" style="margin-top: 25px;">Уйти из лавки</button>
+    </div>
+
+    <!-- АДМИН-ПАНЕЛЬ -->
+    <div id="admin-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 9999; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
+        <div style="background: #10121d; border: 3px solid #ff2a4b; border-radius: 14px; padding: 30px; width: 400px; text-align: center; box-shadow: 0 0 35px rgba(255,42,75,0.5);">
+            <h2 style="color: #ff2a4b; margin-top: 0; font-family: Cinzel;">⚙️ Админ-Панель</h2>
+            <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                <button class="manga-btn" onclick="adminGive('allItems')">Выдать ВСЕ предметы</button>
+                <button class="manga-btn" onclick="adminGive('allClans')">Выдать ВСЕ кланы</button>
+                <button class="manga-btn" onclick="adminGive('spins')" style="border-color: #00e5ff; color: #00e5ff;">Выдать 1000 Спинов</button>
+                <button class="manga-btn" onclick="adminGive('coins')" style="border-color: #ffab00; color: #ffab00;">Выдать 1,000,000 Монет</button>
+                <button class="manga-btn" onclick="adminGive('lvl')" style="border-color: #ff1744; color: #ff1744;">Выдать 100 Уровней</button>
+                <button class="manga-btn" onclick="adminReset()" style="border-color: #ff2a4b; background: #2d050a; color: #ff2a4b; margin-top: 15px;">СБРОСИТЬ ВЕСЬ ПРОГРЕСС</button>
+            </div>
+            <button class="manga-btn" onclick="document.getElementById('admin-modal').style.display='none'" style="margin-top: 25px; width: 100%;">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- ВСПЛЫВАЮЩЕЕ УВЕДОМЛЕНИЕ -->
+    <div id="custom-alert" style="display: none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #10121d; border: 2px solid #ff0000; border-radius: 10px; padding: 15px 25px; box-shadow: 0 0 25px rgba(255, 0, 0, 0.4); z-index: 99999; text-align: center; min-width: 300px;">
+        <div id="custom-alert-text" style="font-size: 1.1rem; font-weight: bold; color: #ff0000; margin-bottom: 15px; font-family: 'Rajdhani', sans-serif;">Текст ошибки</div>
+        <button class="manga-btn" onclick="document.getElementById('custom-alert').style.display='none'" style="padding: 5px 20px; font-size: 0.9rem;">ОК</button>
+    </div>
+    <!-- КАСТОМНОЕ ОКНО ВВОДА ПАРОЛЯ -->
+    <div id="password-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
+        <div style="background: #14110f; border: 3px solid #5c4033; border-radius: 12px; padding: 30px; width: 340px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.9); display: flex; flex-direction: column; align-items: center;">
+            <h3 style="color: #f5e5c9; margin: 0 0 20px 0; font-family: 'Cinzel', serif; font-size: 1.2rem;">Пароль администратора</h3>
+            <input type="password" id="admin-password-input" style="width: 100%; box-sizing: border-box; padding: 10px; background: #1c1613; border: 2px solid #5c4033; color: #e6d5b8; border-radius: 6px; font-size: 1.1rem; text-align: center; margin-bottom: 20px; outline: none;" placeholder="••••">
+            <div style="display: flex; gap: 15px; justify-content: center; width: 100%;">
+                <button class="manga-btn" id="btn-password-ok" style="padding: 8px 24px;">Вход</button>
+                <button class="manga-btn" id="btn-password-cancel" style="padding: 8px 24px; background: #3b2d26;">Отмена</button>
+            </div>
+        </div>
+    </div>
+    <script src="data.js"></script>
+    <script src="demon.js"></script>
+    <script src="demons.js"></script>
+</body>
+</html>

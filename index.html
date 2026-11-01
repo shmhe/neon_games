@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Cyber Clicker RPG v2.0</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Стиль для кнопки выхода, чтобы она не терялась */
+        .exit-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: rgba(13, 9, 23, 0.8);
+            border: 1px solid rgba(157, 78, 221, 0.5);
+            border-radius: 8px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: 'Segoe UI', sans-serif;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        .exit-btn:hover {
+            background: #9d4edd;
+            box-shadow: 0 0 15px #9d4edd;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- КНОПКА ВЫХОДА В ЛОББИ -->
+    <a href="main.html" class="exit-btn">← В Лобби</a>
+
+    <div class="game-container">
+        <!-- ЛЕВАЯ ПАНЕЛЬ: Кликер и Главные Данные -->
+        <div class="panel click-section">
+            <div class="rebirth-badge" id="rebirth-badge">Эпоха: 0</div>
+            
+            <div class="score-container">
+                <h1 id="score-display">0</h1>
+                <div class="cps-display" id="cps-display">доход: 0/сек</div>
+                <div class="multiplier-tag" id="mult-display">Мультипликатор: x1.0</div>
+            </div>
+
+            <div class="cookie-wrapper">
+                <button class="cookie-btn" id="cookie-btn"></button>
+            </div>
+            
+            <button class="action-btn rebirth-btn" id="rebirth-btn">
+                <span class="btn-title">Совершить Перерождение</span>
+                <span class="btn-subtitle" id="rebirth-cost-text">Требуется: 100 000</span>
+            </button>
+            
+            <button class="action-btn admin-toggle-btn" id="admin-toggle-btn">⚙️ Терминал Разработчика</button>
+        </div>
+
+        <!-- ЦЕНТРАЛЬНАЯ ПАНЕЛЬ: Инкубатор и Кристалл -->
+        <div class="panel center-section">
+            <!-- Блок яиц -->
+            <div class="section-block">
+                <h2 class="section-title">Био-Инкубатор 🧬</h2>
+                <button class="egg-btn" id="buy-egg-btn">
+                    <span class="egg-title">Синтезировать Яйцо</span>
+                    <span class="egg-price">500 🪙</span>
+                </button>
+                <div class="pets-container">
+                    <div class="pets-list" id="pets-list"></div>
+                </div>
+            </div>
+
+            <!-- Блок мини-игры -->
+            <div class="section-block">
+                <h2 class="section-title">Сбор Кристаллов Энергии ⚡</h2>
+                <div class="minigame-area" id="minigame-area">
+                    <div class="minigame-start-screen" id="minigame-start-screen">
+                        <button class="play-btn" id="start-game-btn">Запустить Синхронизацию (10с)</button>
+                    </div>
+                    <div class="crystal" id="crystal-target">💎</div>
+                </div>
+                <div class="minigame-stats" id="minigame-stats">Модуль готов к запуску...</div>
+            </div>
+        </div>
+
+        <!-- ПРАВАЯ ПАНЕЛЬ: Магазин и Достижения -->
+        <div class="panel shop-section">
+            <h2 class="shop-title">Достижения 🏆</h2>
+            <div class="achievements-list" id="achievements-list"></div>
+
+            <h2 class="shop-title">Технологии ⚙️</h2>
+            <div class="shop-scroll" id="shop-container"></div>
+            
+            <button class="reset-btn" id="reset-btn">Форматировать Память (Сброс)</button>
+        </div>
+    </div>
+
+    <!-- АДМИН-ПАНЕЛЬ (Модальное окно) -->
+    <div class="admin-modal" id="admin-modal">
+        <div class="admin-content">
+            <h3>🛠️ Панель Управления Ядром</h3>
+            <div class="admin-field">
+                <label>Генерация валюты:</label>
+                <div class="admin-row">
+                    <input type="number" id="admin-score-input" value="500000">
+                    <button id="admin-add-score">Впрыск</button>
+                </div>
+            </div>
+            <div class="admin-field">
+                <label>Коррекция эпохи:</label>
+                <div class="admin-row">
+                    <input type="number" id="admin-rebirth-input" value="2">
+                    <button id="admin-set-rebirth">Применить</button>
+                </div>
+            </div>
+            <div class="admin-field">
+                <label>Клонировать случайного питомца:</label>
+                <button id="admin-give-pet" style="width: 100%;">Создать матрицу</button>
+            </div>
+            <button class="action-btn close-admin" id="admin-close-btn">Отключиться</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
